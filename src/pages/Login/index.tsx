@@ -2,6 +2,7 @@ import { useState, useContext } from "react";
 import InputField from "@/components/InputField";
 import { authContext } from "@/context/authContext";
 import { userContext } from "@/context/userContext";
+import { NavLink } from "react-router-dom";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -39,7 +40,7 @@ const Login = () => {
           now
         </h2>
       </div>
-      <form onSubmit={handleSubmit} className="m-12">
+      <form onSubmit={handleSubmit} className="m-12 flex flex-col">
         <div className="relative z-0 mb-6 w-full group">
           <InputField
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
@@ -70,10 +71,15 @@ const Login = () => {
         <button
           onSubmit={handleSubmit}
           type="submit"
-          className={`text-white bg-blue-700 hover:bg-blue-800    focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800`}
+          className={`text-white bg-zinc-700 hover:bg-blue-800    focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800`}
         >
-          Submit
+          LogIn
         </button>
+        <NavLink to={"/register"}>
+          <span className=" text-xs underline">
+            I don't have an account yet.
+          </span>
+        </NavLink>
       </form>
     </div>
   );

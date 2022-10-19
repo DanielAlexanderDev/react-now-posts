@@ -17,7 +17,7 @@ const Home = () => {
       .then((data) => setUsers(data));
   }, []);
   return (
-    <>
+    <main>
       {users.map((user) => (
         <div
           className="flex flex-col justify-center items-center my-4"
@@ -29,7 +29,7 @@ const Home = () => {
           <p className="text-sm font-thin">{user.createdAt.substring(0, 10)}</p>
         </div>
       ))}
-    </>
+    </main>
   );
 };
 export default Home;

@@ -1,5 +1,6 @@
 import InputField from "@/components/InputField";
 import { useState } from "react";
+import { NavLink } from "react-router-dom";
 
 const Register = () => {
   const [pass, setPass] = useState<string>("");
@@ -39,7 +40,7 @@ const Register = () => {
   };
 
   return (
-    <div className=" px-2 flex flex-col md:flex-row justify-center  items-center">
+    <div className=" h-[75vh] px-2 flex flex-col md:flex-row justify-center  items-center">
       <div>
         <h2 className="text-center mb-6 font-extrabold md:text-6xl lg:text-8xl text-5xl m-12">
           Register
@@ -113,21 +114,31 @@ const Register = () => {
           >
             Confirm Password
           </InputField>
-          <span>{isConfirmed ? "Bien" : "Mal"}</span>
+          <div
+            className={`${
+              isConfirmed ? "bg-emerald-400" : "bg-red-500"
+            } w-4 h-4 rounded-lg`}
+          ></div>
         </div>
-
-        <button
-          onSubmit={handleSubmit}
-          type="submit"
-          disabled={!isConfirmed}
-          className={`text-white ${
-            isConfirmed
-              ? "bg-blue-700 hover:bg-blue-800"
-              : "bg-gray-300 cursor-not-allowed"
-          }    focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800`}
-        >
-          Submit
-        </button>
+        <div className="flex flex-col w-full">
+          <button
+            onSubmit={handleSubmit}
+            type="submit"
+            disabled={!isConfirmed}
+            className={`text-white ${
+              isConfirmed
+                ? "bg-blue-700 hover:bg-blue-800"
+                : "bg-gray-300 cursor-not-allowed"
+            }    focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-1/2 px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800`}
+          >
+            Submit
+          </button>
+          <NavLink className="group" to={"/login"}>
+            <span className="text-xs underline">
+              I already have an account.
+            </span>
+          </NavLink>
+        </div>
       </form>
     </div>
   );

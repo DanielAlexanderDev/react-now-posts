@@ -12,7 +12,7 @@ import Browse from "./pages/Browse";
 import { UserProvider } from "./context/userContext";
 
 function App() {
-  const context = useContext(authContext);
+  const { isAuth } = useContext(authContext);
   return (
     <>
       <UserProvider>
@@ -21,19 +21,20 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route
             path="/login"
-            element={context?.isAuth ? <Navigate to={"/profile"} /> : <Login />}
+            element={isAuth ? <Navigate to={"/profile"} /> : <Login />}
           />
           <Route path="/explore" element={<Browse />} />
           <Route
             path="/register"
-            element={
-              context?.isAuth ? <Navigate to={"/profile"} /> : <Register />
-            }
+            element={isAuth ? <Navigate to={"/profile"} /> : <Register />}
           />
-          <Route path="/create" element={<Create />} />
+          <Route
+            path="/create"
+            element={isAuth ? <Create /> : <Navigate to={"/login"} />}
+          />
           <Route
             path="/profile"
-            element={context?.isAuth ? <Profile /> : <h1>Inicia Sesion</h1>}
+            element={isAuth ? <Profile /> : <Navigate to={"/login"} />}
           />
           <Route path="*" element={<>NOT FOUND</>} />
         </Routes>
