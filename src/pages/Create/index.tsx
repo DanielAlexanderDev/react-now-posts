@@ -4,8 +4,8 @@ import { useState } from "react";
 const Create = () => {
   const [charNumber, setCharNumber] = useState(0);
   return (
-    <div className="w-full">
-      <div className="w-1/3 h-auto flex flex-col justify-center items-center">
+    <div className="w-full flex flex-col justify-center items-center ">
+      <div className="w-1/3 h-auto ">
         <InputField type="text" name="title" placeholder=" " required>
           Title
         </InputField>

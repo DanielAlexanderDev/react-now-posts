@@ -5,6 +5,7 @@ import { userContext } from "@/context/userContext";
 import { NavLink } from "react-router-dom";
 
 const Login = () => {
+  const [error, setError] = useState<string>("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { activateAuth } = useContext(authContext);
@@ -16,6 +17,7 @@ const Login = () => {
   };
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+
     fetch("http://localhost:3001/api/v1/login", {
       method: "POST",
       headers: {
@@ -27,7 +29,8 @@ const Login = () => {
       .then((data) => {
         activateAuth(data.token);
         console.log(userInfo);
-      });
+      })
+      .catch((error) => console.error(error));
   };
 
   return (
@@ -67,18 +70,15 @@ const Login = () => {
             Password
           </InputField>
         </div>
-
         <button
           onSubmit={handleSubmit}
           type="submit"
-          className={`text-white bg-zinc-700 hover:bg-blue-800    focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800`}
+          className={`text-white bg-zinc-600 hover:bg-zinc-700    focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800`}
         >
           LogIn
         </button>
         <NavLink to={"/register"}>
-          <span className=" text-xs underline">
-            I don't have an account yet.
-          </span>
+          <span className=" text-xs underline">I don't have an account.</span>
         </NavLink>
       </form>
     </div>

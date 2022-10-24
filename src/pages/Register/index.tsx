@@ -41,7 +41,7 @@ const Register = () => {
 
   return (
     <div className=" h-[75vh] px-2 flex flex-col md:flex-row justify-center  items-center">
-      <div>
+      <div className="md:border-r-2">
         <h2 className="text-center mb-6 font-extrabold md:text-6xl lg:text-8xl text-5xl m-12">
           Register
         </h2>
@@ -114,11 +114,6 @@ const Register = () => {
           >
             Confirm Password
           </InputField>
-          <div
-            className={`${
-              isConfirmed ? "bg-emerald-400" : "bg-red-500"
-            } w-4 h-4 rounded-lg`}
-          ></div>
         </div>
         <div className="flex flex-col w-full">
           <button

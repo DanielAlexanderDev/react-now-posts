@@ -1,6 +1,7 @@
 import { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { authContext } from "@/context/authContext";
+import { userContext } from "@/context/userContext";
 import NavItem from "./NavItem";
 import { HiPlus } from "react-icons/hi";
 import { FaUserCircle } from "react-icons/fa";
@@ -46,7 +47,7 @@ const Header = () => {
                   aria-expanded="false"
                   data-dropdown-toggle="user-dropdown"
                   data-dropdown-placement="bottom"
-                  onClick={() => setShowModal((prev) => !prev)}
+                  onClick={() => setShowModal(!showModal)}
                 >
                   <FaUserCircle size={"1.5em"} />
                 </button>
@@ -68,14 +69,14 @@ const Header = () => {
                       name@flowbite.com
                     </span>
                   </div>
-                  <ul className="py-1" aria-labelledby="user-menu-button">
+                  <ul className="pt-1" aria-labelledby="user-menu-button">
                     <li>
-                      <a
-                        href="#"
+                      <Link
+                        to="/profile"
                         className="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
                       >
-                        Dashboard
-                      </a>
+                        Profile
+                      </Link>
                     </li>
                     <li>
                       <a
@@ -87,28 +88,16 @@ const Header = () => {
                     </li>
 
                     <li>
-                      {isAuth ? (
-                        <button
-                          className="block w-full py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                          onClick={() => {
-                            setShowModal(false);
-                            removeAuth();
-                            navigate("/login");
-                          }}
-                        >
-                          Log out
-                        </button>
-                      ) : (
-                        <button
-                          className="block w-full py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                          onClick={() => {
-                            setShowModal(false);
-                            navigate("/login");
-                          }}
-                        >
-                          Log in
-                        </button>
-                      )}
+                      <button
+                        className="block w-full py-2 px-4 text-sm text-gray-700 bg-gray-100 hover:bg-gray-300 "
+                        onClick={() => {
+                          setShowModal(false);
+                          removeAuth();
+                          navigate("/login");
+                        }}
+                      >
+                        Log out
+                      </button>
                     </li>
                   </ul>
                 </div>
@@ -136,15 +125,19 @@ const Header = () => {
             </button>
           </div>
         ) : (
-          <div>
+          <div className="z-10">
             <ul className="flex gap-x-2">
-              <button className=" bg-slate-300 rounded-md px-3 text-black">
-                <Link to={"/login"}>Login</Link>
-              </button>
+              <Link to={"/login"}>
+                <button className=" bg-slate-300 rounded-md px-3 text-black">
+                  Login
+                </button>
+              </Link>
               <span> or </span>
-              <button className=" bg-slate-300 rounded-md px-3 text-black">
-                <Link to={"/register"}>Register</Link>
-              </button>
+              <Link to={"/register"}>
+                <button className=" bg-slate-300 rounded-md px-3 text-black">
+                  Register
+                </button>
+              </Link>
             </ul>
           </div>
         )}
