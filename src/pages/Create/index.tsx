@@ -6,7 +6,7 @@ const Create = () => {
   return (
     <div className="w-full flex flex-col justify-center items-center ">
       <div className="w-1/3 h-auto ">
-        <InputField type="text" name="title" placeholder=" " required>
+        <InputField type="text" name="title" required>
           Title
         </InputField>
         <label htmlFor="create-blog"></label>
