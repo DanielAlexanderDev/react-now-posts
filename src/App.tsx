@@ -10,6 +10,9 @@ import Header from "./components/Header";
 import Profile from "./pages/Profile";
 import Browse from "./pages/Browse";
 import { UserProvider } from "./context/userContext";
+import { Feed } from "./pages/Feed";
+import { About } from "./pages/About";
+import { Footer } from "./components/Footer";
 
 function App() {
   const { isAuth } = useContext(authContext);
@@ -18,7 +21,12 @@ function App() {
       <UserProvider>
         <Header />
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route
+            path="/"
+            element={isAuth ? <Navigate to="/feed" /> : <Home />}
+          />
+          <Route path="/feed" element={<Feed />} />
+          <Route path="/about" element={<About />} />
           <Route
             path="/login"
             element={isAuth ? <Navigate to={"/profile"} /> : <Login />}
@@ -38,6 +46,7 @@ function App() {
           />
           <Route path="*" element={<>NOT FOUND</>} />
         </Routes>
+        <Footer />
       </UserProvider>
     </>
   );

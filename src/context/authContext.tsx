@@ -15,9 +15,9 @@ export const authContext = createContext<AuthContextInterface>(
 );
 
 export const Provider = ({ children }: ContextProps) => {
-  const [isAuth, setIsAuth] = useState(() => {
-    return window.sessionStorage.getItem("sess_id_token_notes") ? true : false;
-  });
+  const [isAuth, setIsAuth] = useState(
+    () => window.sessionStorage.getItem("sess_id_token_notes") !== null
+  );
 
   const value = {
     isAuth,
@@ -28,6 +28,7 @@ export const Provider = ({ children }: ContextProps) => {
     removeAuth: () => {
       setIsAuth(false);
       window.sessionStorage.removeItem("sess_id_token_notes");
+      window.localStorage.removeItem("user_info");
     },
   };
   return <authContext.Provider value={value}>{children}</authContext.Provider>;

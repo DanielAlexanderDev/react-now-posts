@@ -1,15 +1,15 @@
-import { createContext, ReactNode, useState } from "react";
-
-interface UserInfoInterface {
-  sub: string;
-  name: string;
-  email: string;
-  iat: number;
-}
+import {
+  createContext,
+  ReactNode,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
+import { UserInterface } from "@/types/types";
 
 interface UserContextInterface {
-  userInfo: UserInfoInterface | null;
-  getUserInfo: (token: string) => void;
+  userInfo: UserInterface | null;
+  setUser: (data: UserInterface) => void;
 }
 
 export const userContext = createContext<UserContextInterface>(
@@ -19,14 +19,33 @@ export const userContext = createContext<UserContextInterface>(
 interface Props {
   children: ReactNode;
 }
+export const useUserInfo = () => {
+  const context = useContext(userContext);
+  return context;
+};
 
 export const UserProvider = ({ children }: Props) => {
   const [userInfo, setUserInfo] = useState(null);
 
-  const value = {
-    userInfo,
-    getUserInfo: (token: string) => {},
+  const getUserInfo = () => {
+    try {
+      const localUserInfo = window.localStorage.getItem("user_info");
+      if (!localUserInfo) return null;
+      setUserInfo(JSON.parse(localUserInfo));
+    } catch (error) {
+      console.log(error);
+    }
   };
+  const setUser = (data: UserInterface) => {
+    window.localStorage.setItem("user_info", JSON.stringify(data));
+  };
+  useEffect(() => {
+    getUserInfo();
+  }, []);
 
-  return <userContext.Provider value={value}>{children}</userContext.Provider>;
+  return (
+    <userContext.Provider value={{ userInfo, setUser }}>
+      {children}
+    </userContext.Provider>
+  );
 };
