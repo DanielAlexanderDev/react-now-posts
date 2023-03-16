@@ -10,5 +10,7 @@ export interface UserInterface {
   lastName: string;
   email: string;
   password: string;
-  createdAt: Date;
+  createdAt: string;
 }
+
+export type RegisterInterface = Pick<UserInterface, "email" | "password">;

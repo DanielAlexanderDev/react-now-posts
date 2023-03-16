@@ -18,4 +18,7 @@ export default defineConfig({
     // since parsing CSS is slow
     css: true,
   },
+  server: {
+    host: true,
+  },
 });
