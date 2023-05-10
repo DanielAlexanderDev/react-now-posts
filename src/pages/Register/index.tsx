@@ -1,39 +1,39 @@
-import InputField from "@/components/InputField";
-import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
-import ilustration from "../../space.svg";
+import InputField from '@/components/InputField'
+import React, { useState } from 'react'
+import { NavLink } from 'react-router-dom'
+import ilustration from '../../space.svg'
 
 const Register = () => {
-  const [errorMessage, setErrorMessage] = useState("");
-  const [successMessage, setSuccessMessage] = useState("");
-  const [toggleType, setToggleType] = useState("password");
+  const [errorMessage, setErrorMessage] = useState('')
+  const [successMessage, setSuccessMessage] = useState('')
+  const [toggleType, setToggleType] = useState('password')
   const [formData, setFormData] = useState({
-    name: "",
-    lastName: "",
-    email: "",
-    password: "",
-  });
+    name: '',
+    lastName: '',
+    email: '',
+    password: '',
+  })
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const name = e.target.name;
+    const name = e.target.name
     setFormData((prev) => ({
       ...prev,
       [name]: e.target.value,
-    }));
-  };
+    }))
+  }
 
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    fetch("http://localhost:3001/api/v1/users", {
-      method: "POST",
+    e.preventDefault()
+    fetch('http://localhost:3001/api/v1/users', {
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify(formData),
     })
       .then((res) => res.json())
-      .then((data) => console.log(data));
-  };
+      .then((data) => console.log(data))
+  }
 
   return (
     <main className=" min-h-[75vh] md:h-[92vh]  md:flex items-center justify-center bg-zinc-100 m-0 p-0">
@@ -51,6 +51,7 @@ const Register = () => {
           <div className="grid md:grid-cols-2 md:gap-6">
             <div className="relative z-0 mb-6 w-full group">
               <InputField
+                autoFocus
                 onChange={handleChange}
                 type="text"
                 name="name"
@@ -99,7 +100,7 @@ const Register = () => {
           {successMessage && (
             <span className=" flex bg-green-300 px-4 py-1 rounded-md">
               {successMessage}
-              <NavLink to={"/login"} className="font-bold underline">
+              <NavLink to={'/login'} className="font-bold underline">
                 Log In
               </NavLink>
             </span>
@@ -108,11 +109,11 @@ const Register = () => {
             <button
               onSubmit={handleSubmit}
               type="submit"
-              className={`text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-1/2 px-5 py-2.5 text-center `}
+              className={`text-white bg-zinc-600 hover:bg-zinc-700 focus:ring-4 focus:outline-none  font-medium rounded-lg text-sm w-1/2 px-5 py-2.5 text-center `}
             >
               Submit
             </button>
-            <NavLink className="group" to={"/login"}>
+            <NavLink className="group" to={'/login'}>
               <span className="text-xs underline">
                 I already have an account.
               </span>
@@ -124,13 +125,13 @@ const Register = () => {
         <img
           src={ilustration}
           className={
-            "lg:w-[80%] lg:min-w-[70%] hidden lg:block  lg:opacity-100 p-5"
+            'lg:w-[80%] lg:min-w-[70%] hidden lg:block  lg:opacity-100 p-5'
           }
           alt=""
         />
       </div>
     </main>
-  );
-};
+  )
+}
 
-export default Register;
+export default Register

@@ -1,33 +1,32 @@
-import { useState, useContext } from "react";
-import { getToken } from "@/api/getToken";
-import InputField from "@/components/InputField";
-import { authContext } from "@/context/authContext";
-import { useUserInfo } from "@/context/userContext";
-import { NavLink } from "react-router-dom";
-import ilustration from "../../illu1.svg";
-import { UserInterface } from "@/types/types";
+import { useState } from 'react'
+import { getToken } from '@/api/getToken'
+import InputField from '@/components/InputField'
+import { useUserInfo } from '@/context/userContext'
+import { NavLink } from 'react-router-dom'
+import ilustration from '@/illu1.svg'
+import { useAuth } from '@/hooks/useAuth'
 
 const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const { activateAuth } = useContext(authContext);
-  const { setUser } = useUserInfo();
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const { activateAuth } = useAuth()
+  const { setUser } = useUserInfo()
 
   const formValue = {
     email: email,
     password: password,
-  };
+  }
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+    e.preventDefault()
     getToken(formValue)
       .then((res) => res.json())
       .then((data) => {
-        activateAuth(data.token);
-        setUser(data.user);
-        console.log(data);
+        activateAuth(data.token)
+        setUser(data.user)
+        console.log(data)
       })
-      .catch((error) => console.error(error));
-  };
+      .catch((error) => console.error(error))
+  }
 
   return (
     <main className=" min-h-[75vh] md:h-[92vh]  md:flex items-center justify-center bg-zinc-100 m-0 p-0">
@@ -46,6 +45,7 @@ const Login = () => {
         >
           <div className="relative z-0 mb-6 w-full group">
             <InputField
+              autoFocus
               onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                 setEmail(e.target.value)
               }
@@ -71,11 +71,11 @@ const Login = () => {
           <button
             onSubmit={handleSubmit}
             type="submit"
-            className={`text-white bg-zinc-600 hover:bg-zinc-700    focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm sm:w-auto px-5 py-2.5 text-center `}
+            className={`text-white bg-zinc-600 hover:bg-zinc-700    focus:ring-4 focus:outline-none font-medium rounded-lg text-sm sm:w-auto px-5 py-2.5 text-center `}
           >
             LogIn
           </button>
-          <NavLink to={"/register"}>
+          <NavLink to={'/register'}>
             <span className=" text-xs underline">I don't have an account.</span>
           </NavLink>
         </form>
@@ -84,12 +84,12 @@ const Login = () => {
         <img
           src={ilustration}
           className={
-            "md:w-full md:min-w-[90%] hidden md:block  md:opacity-100 p-5"
+            'md:w-full md:min-w-[90%] hidden md:block  md:opacity-100 p-5'
           }
           alt=""
         />
       </div>
     </main>
-  );
-};
-export default Login;
+  )
+}
+export default Login

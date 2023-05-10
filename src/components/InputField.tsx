@@ -1,23 +1,22 @@
-import React, { ReactNode } from "react";
+import React, {
+  ButtonHTMLAttributes,
+  InputHTMLAttributes,
+  ReactNode,
+} from 'react'
+import { FC } from 'react'
 
-interface Props {
-  type: string;
-  name: string;
-  required: boolean;
-  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  children: ReactNode;
+interface Props extends InputHTMLAttributes<HTMLInputElement> {
+  children: ReactNode
+  name: string
 }
 
-const InputField = ({ type, name, required, onChange, children }: Props) => {
+const InputField: FC<Props> = ({ children, name, ...props }) => {
   return (
     <>
       <input
-        type={type}
-        name={name}
         className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none  focus:outline-none focus:ring-0  peer"
         placeholder=" "
-        required={required}
-        onChange={onChange}
+        {...props}
       />
       <label
         htmlFor={name}
@@ -26,6 +25,6 @@ const InputField = ({ type, name, required, onChange, children }: Props) => {
         {children}
       </label>
     </>
-  );
-};
-export default InputField;
+  )
+}
+export default InputField

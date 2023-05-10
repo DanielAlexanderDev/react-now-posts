@@ -1,5 +1,3 @@
-import InputField from "./InputField";
-
 const SearchInput = () => {
   return (
     <form className="flex items-center">
@@ -51,6 +49,6 @@ const SearchInput = () => {
         <span className="sr-only">Search</span>
       </button>
     </form>
-  );
-};
-export default SearchInput;
+  )
+}
+export default SearchInput
