@@ -1,35 +1,35 @@
-import { createContext, ReactNode, useState } from "react";
+import { createContext, ReactNode, useState } from 'react'
 
 interface AuthContextInterface {
-  isAuth: boolean;
-  activateAuth: (token: string) => void;
-  removeAuth: () => void;
+  userIsAuth: boolean
+  activateAuth: (token: string) => void
+  removeAuth: () => void
 }
 
 interface ContextProps {
-  children: ReactNode;
+  children: ReactNode
 }
 
 export const authContext = createContext<AuthContextInterface>(
   {} as AuthContextInterface
-);
+)
 
 export const Provider = ({ children }: ContextProps) => {
   const [isAuth, setIsAuth] = useState(
-    () => window.sessionStorage.getItem("sess_id_token_notes") !== null
-  );
+    () => window.sessionStorage.getItem('sess_id_token_notes') !== null
+  )
 
   const value = {
-    isAuth,
+    userIsAuth: isAuth,
     activateAuth: (token: string) => {
-      setIsAuth(true);
-      window.sessionStorage.setItem("sess_id_token_notes", token);
+      setIsAuth(true)
+      window.sessionStorage.setItem('sess_id_token_notes', token)
     },
     removeAuth: () => {
-      setIsAuth(false);
-      window.sessionStorage.removeItem("sess_id_token_notes");
-      window.localStorage.removeItem("user_info");
+      setIsAuth(false)
+      window.sessionStorage.removeItem('sess_id_token_notes')
+      window.localStorage.removeItem('user_info')
     },
-  };
-  return <authContext.Provider value={value}>{children}</authContext.Provider>;
-};
+  }
+  return <authContext.Provider value={value}>{children}</authContext.Provider>
+}

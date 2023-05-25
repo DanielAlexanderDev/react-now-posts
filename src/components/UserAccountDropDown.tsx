@@ -5,9 +5,10 @@ import { useAuth } from '@/hooks/useAuth'
 
 interface Props {
   show: boolean
+  closeModal: () => void
 }
 
-function UserAccountDropDown({ show }: Props) {
+function UserAccountDropDown({ show, closeModal }: Props) {
   const navigate = useNavigate()
   const { removeAuth } = useAuth()
   const { userInfo } = useUserInfo()
@@ -21,7 +22,6 @@ function UserAccountDropDown({ show }: Props) {
         }  text-base list-none bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600 `}
         id="user-dropdown"
         tabIndex={1}
-        onBlur={() => console.log('blured')}
       >
         <div className="py-3 px-4">
           <span className="block text-sm text-gray-900 dark:text-white">
@@ -32,8 +32,20 @@ function UserAccountDropDown({ show }: Props) {
           </span>
         </div>
         <ul className="pt-1" aria-labelledby="user-menu-button">
-          <DropDownButton path="/profile" text="Profile" />
-          <DropDownButton path="/account" text="Settings" />
+          <DropDownButton
+            text="Profile"
+            onClick={() => {
+              navigate(`/profile/${userInfo?._id}`)
+              closeModal()
+            }}
+          />
+          <DropDownButton
+            text="Settings"
+            onClick={() => {
+              navigate('/settings')
+              closeModal()
+            }}
+          />
           <li>
             <button
               className="block w-full py-2 px-4 text-sm text-gray-700 bg-gray-100 hover:bg-gray-300 "

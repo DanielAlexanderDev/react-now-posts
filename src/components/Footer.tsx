@@ -1,5 +1,4 @@
-import { BsGithub, BsLinkedin } from 'react-icons/bs'
-import { BiCopyright } from 'react-icons/bi'
+import { CopyrightSVG, GithubSVG, LinkedinSVG } from '@/icons/social'
 
 export const Footer = () => {
   return (
@@ -9,7 +8,7 @@ export const Footer = () => {
           <h2 className="text-3xl font-normal  text-gray-400 whitespace-nowrap">
             now
           </h2>
-          <BiCopyright size={'0.8em'} className="fill-gray-400" />
+          <CopyrightSVG size="0.8em" className="fill-gray-400" />
         </div>
         <p className=" text-lg font-thin text-gray-300">
           Developed by
@@ -17,13 +16,13 @@ export const Footer = () => {
         </p>
         <div className="flex items-center justify-center gap-x-4 ">
           <a target="_blank" href="https://www.github.com/DanielAlexanderDev">
-            <BsGithub size={'1.8em'} className="fill-gray-400" />
+            <GithubSVG size="1.8em" className="fill-gray-400" />
           </a>
           <a
             target="_blank"
             href="https://www.linkedin.com/in/daniel-llumiquinga-campoverde-4ab0a91b9/"
           >
-            <BsLinkedin size={'1.8em'} className="fill-gray-400" />
+            <LinkedinSVG size="1.8em" className="fill-gray-400" />
           </a>
         </div>
       </div>

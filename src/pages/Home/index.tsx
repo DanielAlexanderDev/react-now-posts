@@ -1,24 +1,23 @@
-import { useEffect, useState } from "react";
-import { RiQuillPenLine } from "react-icons/ri";
-import { FaShareSquare, FaUsers } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
+import { QuillPenLineSVG, ShareSquareSVG, UsersSVG } from '@/icons/utils'
 
 interface UserInterface {
-  name: string;
-  lastName: string;
-  email: string;
-  _id: string;
-  createdAt: string;
+  name: string
+  lastName: string
+  email: string
+  _id: string
+  createdAt: string
 }
 
 const Home = () => {
-  const [users, setUsers] = useState<UserInterface[]>([]);
+  const [users, setUsers] = useState<UserInterface[]>([])
 
   useEffect(() => {
-    fetch("http://localhost:3001/api/v1/users")
+    fetch('http://localhost:3001/api/v1/users')
       .then((res) => res.json())
-      .then((data) => setUsers(data));
-  }, []);
+      .then((data) => setUsers(data))
+  }, [])
   return (
     <main className="bg-zinc-800">
       <section className="bg-gradient-to-r from-slate-300 to-slate-800 py-10 px-3 flex flex-col items-center h-[3/4] ">
@@ -26,7 +25,7 @@ const Home = () => {
           The place to share what's happening
         </h2>
         <div className="flex justify-center items-center flex-col md:flex-row gap-2 my-6">
-          <Link to={"/register"}>
+          <Link to={'/register'}>
             <button className=" bg-zinc-900 px-4 py-2 rounded text-white text-lg shadow-lg hover:scale-105 transition">
               Get started
             </button>
@@ -38,7 +37,7 @@ const Home = () => {
       </section>
       <section className=" flex justify-center items-center flex-wrap gap-3 my-6 mx-6 py-6 px-2">
         <div className=" flex flex-col items-center  w-80 min-w-[320px] bg-white text-xl rounded  aspect-video pt-4">
-          <RiQuillPenLine size={"1.9em"} className="mb-4" />
+          <QuillPenLineSVG size="1.9em" className="mb-4 fill-zinc-800" />
           <ul>
             <li className=" font-medium text-base text-center"> Create</li>
             <li className=" font-thin text-base text-center">
@@ -50,7 +49,7 @@ const Home = () => {
           </ul>
         </div>
         <div className=" flex flex-col items-center  w-80 min-w-[320px] bg-white text-xl rounded  aspect-video pt-4">
-          <FaShareSquare size={"1.8em"} className="mb-4" />
+          <ShareSquareSVG size="1.8em" className="mb-4 fill-zinc-800" />
           <ul>
             <li className=" font-medium text-base text-center"> Share</li>
             <li className=" font-thin text-base text-center">
@@ -62,7 +61,7 @@ const Home = () => {
           </ul>
         </div>
         <div className=" flex flex-col items-center  w-80 min-w-[320px] bg-white text-xl rounded  aspect-video pt-4">
-          <FaUsers size={"1.8em"} className="mb-4" />
+          <UsersSVG size="1.8em" className="mb-4 fill-zinc-800" />
           <ul>
             <li className=" font-medium text-base text-center"> Be part of</li>
             <li className=" font-thin text-base text-center">
@@ -90,6 +89,6 @@ const Home = () => {
         ))}
       </section>
     </main>
-  );
-};
-export default Home;
+  )
+}
+export default Home

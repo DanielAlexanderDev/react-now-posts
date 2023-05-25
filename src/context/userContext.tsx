@@ -4,48 +4,54 @@ import {
   useContext,
   useEffect,
   useState,
-} from "react";
-import { UserInterface } from "@/types/types";
+} from 'react'
+import { PublicUserInterface } from '@/types/types'
 
 interface UserContextInterface {
-  userInfo: UserInterface | null;
-  setUser: (data: UserInterface) => void;
+  userInfo: PublicUserInterface
+  setUser: (data: PublicUserInterface) => void
 }
 
 export const userContext = createContext<UserContextInterface>(
   {} as UserContextInterface
-);
+)
 
 interface Props {
-  children: ReactNode;
+  children: ReactNode
 }
 export const useUserInfo = () => {
-  const context = useContext(userContext);
-  return context;
-};
+  const context = useContext(userContext)
+  return context
+}
 
 export const UserProvider = ({ children }: Props) => {
-  const [userInfo, setUserInfo] = useState(null);
+  const [userInfo, setUserInfo] = useState<PublicUserInterface>({
+    _id: '',
+    email: '',
+    lastName: '',
+    name: '',
+    createdAt: '',
+  })
 
   const getUserInfo = () => {
     try {
-      const localUserInfo = window.localStorage.getItem("user_info");
-      if (!localUserInfo) return null;
-      setUserInfo(JSON.parse(localUserInfo));
+      const localUserInfo = window.localStorage.getItem('user_info')
+      if (!localUserInfo) return null
+      setUserInfo(JSON.parse(localUserInfo))
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
-  };
-  const setUser = (data: UserInterface) => {
-    window.localStorage.setItem("user_info", JSON.stringify(data));
-  };
+  }
+  const setUser = (data: PublicUserInterface) => {
+    window.localStorage.setItem('user_info', JSON.stringify(data))
+  }
   useEffect(() => {
-    getUserInfo();
-  }, []);
+    getUserInfo()
+  }, [])
 
   return (
     <userContext.Provider value={{ userInfo, setUser }}>
       {children}
     </userContext.Provider>
-  );
-};
+  )
+}

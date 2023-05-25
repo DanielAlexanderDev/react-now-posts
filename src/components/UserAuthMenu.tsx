@@ -1,9 +1,13 @@
-import { useState } from "react";
-import { FaUserCircle } from "react-icons/fa";
-import UserAccountDropDown from "./UserAccountDropDown";
+import { useState } from 'react'
+import UserAccountDropDown from './UserAccountDropDown'
+import { UserCircleSVG } from '@/icons/utils'
 
 function UserAuthMenu() {
-  const [showModal, setShowModal] = useState<boolean>(false);
+  const [showModal, setShowModal] = useState<boolean>(false)
+
+  const closeModal = () => {
+    setShowModal(false)
+  }
   return (
     <>
       <div className="flex justify-center  items-center">
@@ -17,13 +21,13 @@ function UserAuthMenu() {
               data-dropdown-toggle="user-dropdown"
               data-dropdown-placement="bottom"
               onClick={() => {
-                setShowModal(!showModal);
+                setShowModal(!showModal)
               }}
             >
-              <FaUserCircle size={"1.5em"} />
+              <UserCircleSVG size="1.5em" className="fill-current" />
             </button>
             {/* <!-- Dropdown menu --> */}
-            <UserAccountDropDown show={showModal} />
+            <UserAccountDropDown show={showModal} closeModal={closeModal} />
           </div>
         </div>
         <button
@@ -48,6 +52,6 @@ function UserAuthMenu() {
         </button>
       </div>
     </>
-  );
+  )
 }
-export default UserAuthMenu;
+export default UserAuthMenu

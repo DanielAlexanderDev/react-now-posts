@@ -9,6 +9,7 @@ import { useAuth } from '@/hooks/useAuth'
 const Login = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [isError, setIsErrr] = useState(false)
   const { activateAuth } = useAuth()
   const { setUser } = useUserInfo()
 
@@ -23,13 +24,14 @@ const Login = () => {
       .then((data) => {
         activateAuth(data.token)
         setUser(data.user)
+        setIsErrr(false)
         console.log(data)
       })
-      .catch((error) => console.error(error))
+      .catch((error) => setIsErrr(true))
   }
 
   return (
-    <main className=" min-h-[75vh] md:h-[92vh]  md:flex items-center justify-center bg-zinc-100 m-0 p-0">
+    <main className=" min-h-[75vh] md:h-[92vh]  md:flex items-center justify-center bg-zinc-100 ">
       <div className="z-10 md:w-1/2 flex flex-col items-center justify-center h-full">
         <div>
           <h2 className="text-center mb-6 font-extrabold md:text-6xl lg:text-8xl text-5xl m-12">
@@ -39,6 +41,11 @@ const Login = () => {
             now
           </h2>
         </div>
+        {isError && (
+          <span className=" text-red-500 text-sm">
+            Credenciales incorrectas (email o password){' '}
+          </span>
+        )}
         <form
           onSubmit={handleSubmit}
           className="m-12 flex flex-col z-10 lg:w-1/3"

@@ -122,7 +122,7 @@ export const About = () => {
             </li>
           </ul>
           <p>
-            You can find the code follwing the{' '}
+            You can find the code following the{' '}
             <a
               className=" underline hover:text-blue-500"
               href="https://github.com/DanielAlexanderDev/react-now-posts"

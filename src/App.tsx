@@ -28,7 +28,7 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route
             path="/login"
-            element={userIsAuth ? <Navigate to={'/profile'} /> : <Login />}
+            element={userIsAuth ? <Navigate to={'/feed'} /> : <Login />}
           />
           <Route path="/explore" element={<Browse />} />
           <Route
@@ -36,7 +36,7 @@ function App() {
             element={userIsAuth ? <Navigate to={'/profile'} /> : <Register />}
           />
           <Route
-            path="/profile"
+            path="/profile/:id"
             element={userIsAuth ? <Profile /> : <Navigate to={'/login'} />}
           />
           <Route path="*" element={<>NOT FOUND</>} />
