@@ -1,8 +1,4 @@
-import React, {
-  ButtonHTMLAttributes,
-  InputHTMLAttributes,
-  ReactNode,
-} from 'react'
+import { type InputHTMLAttributes, ReactNode } from 'react'
 import { FC } from 'react'
 
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
@@ -10,7 +6,7 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
   name: string
 }
 
-const InputField: FC<Props> = ({ children, name, ...props }) => {
+const InputField: FC<Props> = ({ children, ...props }) => {
   return (
     <>
       <input
@@ -19,7 +15,7 @@ const InputField: FC<Props> = ({ children, name, ...props }) => {
         {...props}
       />
       <label
-        htmlFor={name}
+        htmlFor={props.name}
         className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
       >
         {children}

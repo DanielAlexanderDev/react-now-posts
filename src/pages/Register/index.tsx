@@ -2,11 +2,12 @@ import InputField from '@/components/InputField'
 import React, { useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import ilustration from '../../space.svg'
+import { HidePassSVG, ShowPassSVG } from '@/icons/utils'
 
 const Register = () => {
   const [errorMessage, setErrorMessage] = useState('')
   const [successMessage, setSuccessMessage] = useState('')
-  const [toggleType, setToggleType] = useState('password')
+  const [toggleType, setToggleType] = useState<'password' | 'text'>('password')
   const [formData, setFormData] = useState({
     name: '',
     lastName: '',
@@ -81,7 +82,7 @@ const Register = () => {
               Email Address
             </InputField>
           </div>
-          <div className="relative z-0 mb-6 w-full group">
+          <div className="relative z-0 mb-6 w-full group flex items-center">
             <InputField
               onChange={handleChange}
               type={toggleType}
@@ -90,6 +91,19 @@ const Register = () => {
             >
               Password
             </InputField>
+            {toggleType == 'password' ? (
+              <ShowPassSVG
+                onClick={() => setToggleType('text')}
+                className="absolute right-0 fill-gray-500 cursor-pointer hover:fill-gray-800"
+                size="1.4em"
+              />
+            ) : (
+              <HidePassSVG
+                onClick={() => setToggleType('password')}
+                className="absolute right-0 fill-gray-800 cursor-pointer"
+                size="1.4em"
+              />
+            )}
           </div>
 
           {errorMessage && (

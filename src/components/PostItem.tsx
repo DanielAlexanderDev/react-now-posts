@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { FavButton } from './FavButton'
 import { DeleteSVG } from '@/icons/utils'
 import { useState } from 'react'
-import { Toaster, toast } from 'react-hot-toast'
+import { toast } from 'react-hot-toast'
 
 interface PostItemInterface extends PostInterface {
   handleDelete: (id: string) => Promise<void>
@@ -18,6 +18,7 @@ function PostItem({
   handleDelete,
 }: PostItemInterface) {
   const { userInfo } = useUserInfo()
+  const [likes, setLikes] = useState(Math.floor(Math.random() * 15))
   const notify = () => {
     toast.promise(handleDelete(_id) as Promise<unknown>, {
       loading: 'Loading',
@@ -52,8 +53,15 @@ function PostItem({
           ) : null}
           <FavButton
             liked={liked}
-            likes={55}
-            onClick={() => setLiked(!liked)}
+            likes={likes}
+            onClick={() => {
+              setLiked(!liked)
+              if(liked){
+                setLikes(likes -1)
+              }else {
+                setLikes(likes +1)
+              }
+            }}
           />
         </div>
       </div>

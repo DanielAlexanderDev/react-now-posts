@@ -2,7 +2,7 @@ import { CopyrightSVG, GithubSVG, LinkedinSVG } from '@/icons/social'
 
 export const Footer = () => {
   return (
-    <footer className=" bg-[#2D333B]  lg:max-h-[10vh] p-4 lg:px-3 mx-auto">
+    <footer className=" bg-[#2D333B] w-full lg:max-h-[10vh] p-4 lg:px-3 mx-auto">
       <div className="container flex flex-col lg:flex-row lg:justify-between items-start justify-center lg:items-center gap-y-2 mx-auto">
         <div className="flex items-center">
           <h2 className="text-3xl font-normal  text-gray-400 whitespace-nowrap">

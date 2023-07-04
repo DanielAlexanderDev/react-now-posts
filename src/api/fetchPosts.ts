@@ -47,5 +47,4 @@ export const deletePosts = async (id: string, cb: () => void) => {
   if (res.ok) {
     cb()
   }
-  // console.log(data)
 }

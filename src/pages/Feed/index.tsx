@@ -7,7 +7,7 @@ import { useUserInfo } from '@/context/userContext'
 import { createPost, deletePosts } from '@/api/fetchPosts'
 import { RocketSVG } from '@/icons/utils'
 
-const toastOptions = {
+export const toastOptions = {
   loading: {
     duration: 10000,
     className: 'bg-[#22272E] text-gray-400',

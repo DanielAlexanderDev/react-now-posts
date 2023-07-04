@@ -18,30 +18,32 @@ function App() {
   return (
     <>
       <UserProvider>
-        <Header />
-        <Routes>
-          <Route
-            path="/"
-            element={userIsAuth ? <Navigate to="/feed" /> : <Home />}
-          />
-          <Route path="/feed" element={<Feed />} />
-          <Route path="/about" element={<About />} />
-          <Route
-            path="/login"
-            element={userIsAuth ? <Navigate to={'/feed'} /> : <Login />}
-          />
-          <Route path="/explore" element={<Browse />} />
-          <Route
-            path="/register"
-            element={userIsAuth ? <Navigate to={'/profile'} /> : <Register />}
-          />
-          <Route
-            path="/profile/:id"
-            element={userIsAuth ? <Profile /> : <Navigate to={'/login'} />}
-          />
-          <Route path="*" element={<>NOT FOUND</>} />
-        </Routes>
-        <Footer />
+        <div className='min-h-screen bg-[#22272E]'>
+          <Header />
+          <Routes>
+            <Route
+              path="/"
+              element={userIsAuth ? <Navigate to="/feed" /> : <Home />}
+            />
+            <Route path="/feed" element={<Feed />} />
+            <Route path="/about" element={<About />} />
+            <Route
+              path="/login"
+              element={userIsAuth ? <Navigate to={'/feed'} /> : <Login />}
+            />
+            <Route path="/explore" element={<Browse />} />
+            <Route
+              path="/register"
+              element={userIsAuth ? <Navigate to={'/profile'} /> : <Register />}
+            />
+            <Route
+              path="/profile/:id"
+              element={userIsAuth ? <Profile /> : <Navigate to={'/login'} />}
+            />
+            <Route path="*" element={<>NOT FOUND</>} />
+          </Routes>
+          <Footer />
+        </div>
       </UserProvider>
     </>
   )

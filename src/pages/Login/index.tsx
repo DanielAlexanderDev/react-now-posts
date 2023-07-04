@@ -7,19 +7,19 @@ import ilustration from '@/illu1.svg'
 import { useAuth } from '@/hooks/useAuth'
 
 const Login = () => {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
   const [isError, setIsErrr] = useState(false)
   const { activateAuth } = useAuth()
   const { setUser } = useUserInfo()
 
-  const formValue = {
-    email: email,
-    password: password,
-  }
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    getToken(formValue)
+    const email = e.currentTarget.elements.namedItem(
+      'email'
+    ) as HTMLInputElement
+    const password = e.currentTarget.elements.namedItem(
+      'password'
+    ) as HTMLInputElement
+    getToken({ email: email.value, password: password.value })
       .then((res) => res.json())
       .then((data) => {
         activateAuth(data.token)
@@ -53,9 +53,9 @@ const Login = () => {
           <div className="relative z-0 mb-6 w-full group">
             <InputField
               autoFocus
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                setEmail(e.target.value)
-              }
+              // onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              //   setEmail(e.target.value)
+              // }
               type="email"
               name="email"
               required
@@ -65,9 +65,9 @@ const Login = () => {
           </div>
           <div className="relative z-0 mb-6 w-full group">
             <InputField
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                setPassword(e.target.value)
-              }
+              // onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              //   setPassword(e.target.value)
+              // }
               type="password"
               name="password"
               required
@@ -76,7 +76,6 @@ const Login = () => {
             </InputField>
           </div>
           <button
-            onSubmit={handleSubmit}
             type="submit"
             className={`text-white bg-zinc-600 hover:bg-zinc-700    focus:ring-4 focus:outline-none font-medium rounded-lg text-sm sm:w-auto px-5 py-2.5 text-center `}
           >
@@ -93,7 +92,7 @@ const Login = () => {
           className={
             'md:w-full md:min-w-[90%] hidden md:block  md:opacity-100 p-5'
           }
-          alt=""
+          alt="hero image"
         />
       </div>
     </main>
